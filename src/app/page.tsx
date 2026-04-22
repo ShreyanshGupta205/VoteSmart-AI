@@ -16,11 +16,11 @@ export default function Home() {
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative px-6 lg:px-8 py-32 sm:py-48 overflow-hidden">
-          {/* Animated Background Elements */}
+          {/* Animated Background Elements - Tiranga Themed */}
           <div className="absolute inset-0 -z-10 overflow-hidden">
-            <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-brand-200/20 blur-[120px] rounded-full animate-pulse" />
-            <div className="absolute top-[20%] -right-[5%] w-[30%] h-[30%] bg-accent-200/20 blur-[100px] rounded-full animate-pulse delay-700" />
-            <div className="absolute -bottom-[10%] left-[20%] w-[50%] h-[40%] bg-success-200/10 blur-[120px] rounded-full animate-pulse delay-1000" />
+            <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-[#FF9933]/20 blur-[120px] rounded-full animate-pulse" />
+            <div className="absolute top-[20%] -right-[5%] w-[30%] h-[30%] bg-[#ffffff]/40 blur-[100px] rounded-full animate-pulse delay-700" />
+            <div className="absolute -bottom-[10%] left-[20%] w-[50%] h-[40%] bg-[#138808]/20 blur-[120px] rounded-full animate-pulse delay-1000" />
           </div>
 
           <div className="mx-auto max-w-5xl text-center">

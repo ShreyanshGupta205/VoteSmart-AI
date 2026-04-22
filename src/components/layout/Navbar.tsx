@@ -18,6 +18,12 @@ export function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full px-4 sm:px-6 lg:px-8 py-4">
+      {/* Tiranga Top Bar */}
+      <div className="absolute top-0 left-0 w-full h-1 flex">
+        <div className="flex-grow bg-[#FF9933]"></div>
+        <div className="flex-grow bg-white"></div>
+        <div className="flex-grow bg-[#138808]"></div>
+      </div>
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 glass rounded-2xl shadow-premium border-white/20">
         <div className="flex items-center gap-10">
           <Link href="/" className="flex items-center gap-2 group">

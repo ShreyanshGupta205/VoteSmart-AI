@@ -4,27 +4,22 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Primary Brand - Saffron/Orange (Indian Tricolor) */
-  --color-brand-50: #fffaf0;
-  --color-brand-100: #feebc8;
-  --color-brand-200: #fbd38d;
-  --color-brand-300: #f6ad55;
-  --color-brand-400: #ed8936;
-  --color-brand-500: #dd6b20;
-  --color-brand-600: #c05621;
-  --color-brand-700: #9c4221;
+  /* Indian Tricolor (Tiranga) - Official HEX Codes */
+  --color-brand-50: #fff9f5;
+  --color-brand-100: #fff0e6;
+  --color-brand-500: #FF9933; /* Saffron */
+  --color-brand-600: #e68a2e;
+  --color-brand-700: #cc7a29;
 
-  /* Secondary Brand - Ashoka Blue */
-  --color-accent-50: #f0f9ff;
-  --color-accent-100: #e0f2fe;
-  --color-accent-500: #0ea5e9;
-  --color-accent-600: #0284c7;
-  --color-accent-700: #0369a1;
+  /* Ashoka Blue */
+  --color-accent-50: #f0f2ff;
+  --color-accent-500: #000080; /* Navy Blue */
+  --color-accent-600: #000066;
 
-  /* Tertiary - Deep Green */
-  --color-success-50: #f0fdf4;
-  --color-success-500: #22c55e;
-  --color-success-600: #16a34a;
+  /* India Green */
+  --color-success-50: #f0faf1;
+  --color-success-500: #138808; /* India Green */
+  --color-success-600: #0e6606;
 
   /* Fonts */
   --font-sans: "Inter", var(--font-inter), sans-serif;
@@ -40,9 +35,9 @@
 
 @layer base {
   :root {
-    --background: #fdfdfd;
+    --background: #ffffff;
     --foreground: #1a1a1a;
-    --muted: #f1f5f9;
+    --muted: #f8fafc;
     --muted-foreground: #64748b;
     --border: #e2e8f0;
     --input: #e2e8f0;
@@ -50,30 +45,34 @@
   }
 
   .dark {
-    --background: #0f172a;
+    --background: #09090b;
     --foreground: #f8fafc;
     --muted: #1e293b;
     --muted-foreground: #94a3b8;
-    --border: #334155;
-    --input: #334155;
+    --border: #27272a;
+    --input: #27272a;
   }
 }
 
 @layer utilities {
   .glass {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
   }
 
   .dark .glass {
-    background: rgba(15, 23, 42, 0.7);
+    background: rgba(15, 23, 42, 0.75);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
+  .tiranga-gradient {
+    @apply bg-gradient-to-r from-[#FF9933] via-white to-[#138808];
+  }
+
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-accent-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-500 via-accent-500 to-success-500;
   }
 
   .premium-card {

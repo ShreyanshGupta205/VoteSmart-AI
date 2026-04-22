@@ -68,15 +68,14 @@ export default function Dashboard() {
                   initial={{ strokeDashoffset: 263.8 }}
                   animate={{ strokeDashoffset: 263.8 - (263.8 * animatedScore) / 100 }}
                   transition={{ duration: 1.5, ease: "circOut" }}
-                  cx="50" cy="50" r="42" stroke="currentColor" strokeWidth="7" fill="transparent"
+                  cx="50" cy="50" r="42" stroke="#000080" strokeWidth="7" fill="transparent"
                   strokeDasharray="263.8"
                   strokeLinecap="round"
-                  className="text-brand-500"
                 />
               </svg>
               <div className="absolute flex flex-col items-center">
-                <span className="text-5xl font-black font-display text-foreground leading-none">{animatedScore}</span>
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground mt-2">Percent Ready</span>
+                <span className="text-5xl font-black font-display text-[#FF9933] leading-none">{animatedScore}</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#138808] mt-2">Percent Ready</span>
               </div>
             </div>
             <div className="mt-8 grid grid-cols-2 gap-4 w-full">
