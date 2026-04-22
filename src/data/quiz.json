@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "question": "What is the minimum voting age in India?",
+    "options": ["18 years", "21 years", "25 years", "16 years"],
+    "correct": 0,
+    "explanation": "The 61st Amendment Act of 1988 lowered the voting age from 21 to 18 years."
+  },
+  {
+    "id": 2,
+    "question": "What does VVPAT stand for?",
+    "options": [
+      "Voter Voting Paper Audit Trail",
+      "Voter Verifiable Paper Audit Trail",
+      "Voting Verification Paper Audit Trail",
+      "Verified Voting Paper Audit Trail"
+    ],
+    "correct": 1,
+    "explanation": "Voter Verifiable Paper Audit Trail ensures your vote goes to the intended candidate."
+  },
+  {
+    "id": 3,
+    "question": "Who conducts the general elections in India?",
+    "options": ["Supreme Court", "Parliament", "Election Commission of India", "President"],
+    "correct": 2,
+    "explanation": "The Election Commission of India (ECI) is an autonomous constitutional authority responsible for administering election processes in India."
+  }
+]

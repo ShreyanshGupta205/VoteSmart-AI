@@ -1,0 +1,6 @@
+[
+  { "id": "1", "name": "Ravi Kumar", "party": "Development Party", "symbol": "🌱" },
+  { "id": "2", "name": "Priya Sharma", "party": "Progressive Alliance", "symbol": "☀️" },
+  { "id": "3", "name": "Amit Patel", "party": "National Front", "symbol": "🪷" },
+  { "id": "4", "name": "NOTA", "party": "None of the Above", "symbol": "❌" }
+]
