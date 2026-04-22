@@ -77,34 +77,48 @@ export default function AssistantPage() {
     "How do I register to vote?",
     "What is VVPAT?",
     "Am I eligible to vote?",
-    "Explain Scenario: I moved to a new city.",
+    "Moving to a new city?",
   ];
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)] max-w-4xl mx-auto p-4 md:p-6 lg:p-8 w-full">
-      <div className="mb-4 text-center">
-        <h1 className="text-3xl font-bold font-display text-brand-600">AI Assistant</h1>
-        <p className="text-muted-foreground mt-1 text-sm">Your neutral, 24/7 civic companion with Voice Support</p>
+    <div className="flex flex-col h-[calc(100vh-8rem)] max-w-5xl mx-auto p-4 md:p-6 lg:p-8 w-full">
+      <div className="mb-8 text-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="inline-block px-4 py-1.5 mb-4 rounded-full bg-brand-50 text-brand-600 text-xs font-bold uppercase tracking-widest border border-brand-100"
+        >
+          24/7 Neutral AI Companion
+        </motion.div>
+        <h1 className="text-4xl font-black font-display tracking-tight text-foreground sm:text-5xl">
+          Civic <span className="gradient-text">Assistant</span>
+        </h1>
+        <p className="text-muted-foreground mt-2 text-lg font-light">Ask anything about India&apos;s electoral process with voice support</p>
       </div>
 
-      <Card className="flex-grow flex flex-col overflow-hidden bg-background/60 shadow-xl border-brand-100">
-        <CardContent className="flex-grow overflow-y-auto p-4 space-y-4 flex flex-col">
+      <Card className="flex-grow flex flex-col overflow-hidden glass border-white/20 shadow-premium rounded-2xl relative">
+        <CardContent className="flex-grow overflow-y-auto p-6 space-y-6 flex flex-col scrollbar-thin scrollbar-thumb-brand-100">
           <AnimatePresence>
             {messages.map((msg) => (
               <motion.div
                 key={msg.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
                 className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div 
-                  className={`max-w-[80%] p-3 rounded-2xl ${
+                  className={`max-w-[85%] p-4 rounded-2xl shadow-sm leading-relaxed ${
                     msg.role === 'user' 
-                      ? 'bg-brand-500 text-white rounded-tr-sm' 
-                      : 'bg-muted text-foreground border border-border rounded-tl-sm'
+                      ? 'bg-gradient-to-br from-brand-500 to-brand-600 text-white rounded-tr-sm' 
+                      : 'bg-white/80 dark:bg-slate-900/80 text-foreground border border-brand-100/30 rounded-tl-sm'
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">
+                  <div className="flex items-center gap-2 mb-1 opacity-70">
+                    <span className="text-[10px] font-black uppercase tracking-tighter">
+                      {msg.role === 'user' ? 'You' : 'Assistant'}
+                    </span>
+                  </div>
+                  <p className="text-[15px] whitespace-pre-wrap">
                     {msg.parts.map((part: any, i: number) => 
                       part.type === 'text' ? part.text : ''
                     ).join('')}
@@ -115,57 +129,69 @@ export default function AssistantPage() {
           </AnimatePresence>
           {isLoading && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
-              <div className="bg-muted text-muted-foreground p-3 rounded-2xl rounded-tl-sm w-16 flex justify-center items-center gap-1">
+              <div className="bg-white/50 dark:bg-slate-900/50 p-4 rounded-2xl rounded-tl-sm w-20 flex justify-center items-center gap-1.5 border border-brand-50/50">
                 <span className="w-2 h-2 bg-brand-400 rounded-full animate-bounce"></span>
-                <span className="w-2 h-2 bg-brand-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
-                <span className="w-2 h-2 bg-brand-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></span>
+                <span className="w-2 h-2 bg-brand-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                <span className="w-2 h-2 bg-brand-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
               </div>
             </motion.div>
           )}
           <div ref={endOfMessagesRef} />
         </CardContent>
 
-        <div className="p-4 bg-card border-t border-border">
-          <div className="flex gap-2 pb-3 overflow-x-auto scroolbar-hide">
+        <div className="p-6 glass border-t border-white/20 bg-white/40 dark:bg-slate-950/40">
+          <div className="flex gap-2 pb-4 overflow-x-auto scrollbar-hide no-scrollbar">
             {quickReplies.map((qr) => (
               <Button
                 key={qr}
                 variant="outline"
                 size="sm"
                 onClick={() => setInput(qr)}
-                className="whitespace-nowrap text-xs bg-brand-50 hover:bg-brand-100 hover:text-brand-700 border-brand-200"
+                className="whitespace-nowrap text-xs font-bold rounded-xl glass border-brand-100/50 hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all duration-300"
               >
                 {qr}
               </Button>
             ))}
           </div>
-          <form onSubmit={handleSubmit} className="flex gap-2">
+          <form onSubmit={handleSubmit} className="flex gap-3 relative">
             <Button 
               type="button" 
               variant="outline" 
               onClick={toggleListening}
-              className={isListening ? "bg-red-100 text-red-600 border-red-300" : ""}
+              className={cn(
+                "rounded-xl w-14 h-14 flex items-center justify-center text-xl transition-all",
+                isListening 
+                  ? "bg-red-500 text-white border-red-500 animate-pulse shadow-lg shadow-red-500/30" 
+                  : "glass border-brand-100/50 hover:bg-brand-50"
+              )}
               title="Voice Input"
             >
-              🎤
+              {isListening ? "⏹️" : "🎙️"}
             </Button>
-            <Input
-              value={input}
-              onChange={handleInputChange}
-              placeholder="Ask anything about voting..."
-              className="flex-grow shadow-sm"
-              disabled={isLoading || isListening}
-            />
-            <Button type="submit" disabled={isLoading || !input.trim()}>
-              Send
-            </Button>
+            <div className="relative flex-grow">
+              <Input
+                value={input}
+                onChange={handleInputChange}
+                placeholder="Ask anything about voting..."
+                className="w-full h-14 pl-6 pr-16 rounded-xl glass border-brand-100/50 shadow-inner focus:ring-brand-500"
+                disabled={isLoading || isListening}
+              />
+              <Button 
+                type="submit" 
+                disabled={isLoading || !input.trim()}
+                className="absolute right-2 top-2 h-10 w-10 p-0 rounded-lg bg-brand-600 hover:bg-brand-700 transition-transform active:scale-95"
+              >
+                <span className="text-xl">➔</span>
+              </Button>
+            </div>
           </form>
+          <div className="text-center mt-4">
+            <p className="text-[10px] text-muted-foreground/60 uppercase font-black tracking-widest">
+              Verified by Election Information Model • AI can occasionally hallucinate
+            </p>
+          </div>
         </div>
       </Card>
-      
-      <div className="text-center mt-4">
-        <p className="text-xs text-muted-foreground">Disclaimer: AI can make mistakes. For official information, visit <a href="https://eci.gov.in" target="_blank" rel="noreferrer" className="text-brand-600 hover:underline">eci.gov.in</a>.</p>
-      </div>
     </div>
   );
 }

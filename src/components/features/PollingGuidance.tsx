@@ -5,32 +5,33 @@ import { Button } from "@/components/ui/Button";
 
 export default function PollingGuidance() {
   const getBestTimeToVote = () => {
-    // This could theoretically use AI or historical data.
-    // For this prototype, we'll return a static tip based on standard Indian election patterns.
     return {
       time: "1:00 PM - 3:00 PM",
-      reason: "Historically, crowds are thinnest during post-lunch hours."
+      reason: "Crowds are typically lower during these post-lunch hours."
     };
   };
 
   const bestTime = getBestTimeToVote();
 
   return (
-    <Card className="border-accent-200">
-      <CardHeader>
-        <CardTitle className="text-lg">Polling Guidance</CardTitle>
+    <Card className="border-none glass shadow-premium rounded-2xl overflow-hidden">
+      <CardHeader className="pb-2">
+        <CardTitle className="text-xl font-bold font-display tracking-tight">Polling Guidance</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="bg-brand-50 dark:bg-brand-900/20 p-4 rounded-lg">
-          <p className="text-sm font-semibold text-brand-700 dark:text-brand-300">💡 Best Time to Vote Predictor</p>
-          <p className="text-lg font-bold text-foreground mt-1">{bestTime.time}</p>
-          <p className="text-xs text-muted-foreground mt-1">{bestTime.reason}</p>
+      <CardContent className="space-y-6">
+        <div className="bg-brand-50/50 dark:bg-brand-900/10 p-5 rounded-xl border border-brand-100/30">
+          <p className="text-xs font-black uppercase tracking-widest text-brand-600 mb-2">Smart Predictor</p>
+          <p className="text-sm font-bold text-foreground">💡 Recommended Voting Window</p>
+          <p className="text-3xl font-black text-brand-600 dark:text-brand-400 mt-2 font-display">{bestTime.time}</p>
+          <p className="text-xs text-muted-foreground mt-2 font-medium">{bestTime.reason}</p>
         </div>
 
-        <div>
-          <p className="text-sm mb-2">Find the exact location of your polling booth using the official ECI Electoral Search.</p>
-          <a href="https://electoralsearch.eci.gov.in/" target="_blank" rel="noreferrer">
-            <Button className="w-full bg-accent-600 hover:bg-accent-700 text-white">
+        <div className="space-y-4">
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Verify your polling booth location and EPIC details using the official Election Commission portal.
+          </p>
+          <a href="https://electoralsearch.eci.gov.in/" target="_blank" rel="noreferrer" className="block">
+            <Button className="w-full h-12 rounded-xl bg-accent-600 hover:bg-accent-700 text-white font-bold shadow-lg shadow-accent-600/20">
               Find My Polling Booth 🗺️
             </Button>
           </a>

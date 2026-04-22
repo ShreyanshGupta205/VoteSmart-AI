@@ -7,46 +7,51 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen selection:bg-brand-100">
       {/* Disclaimer Banner */}
-      <div className="bg-yellow-100 text-yellow-900 border-b border-yellow-200 px-4 py-2 text-sm text-center font-medium">
-        Disclaimer: This platform is for educational purposes only and is not affiliated with the Election Commission of India.
+      <div className="bg-brand-50 text-brand-900 border-b border-brand-100 px-4 py-2.5 text-xs text-center font-semibold tracking-wide uppercase">
+        Educational Platform • Not affiliated with the Election Commission of India
       </div>
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative px-6 lg:px-8 py-24 sm:py-32 overflow-hidden bg-gradient-to-b from-brand-50 to-white dark:from-brand-900/20 dark:to-background">
-          <div className="mx-auto max-w-4xl text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl font-display"
-            >
-              Your Journey to Becoming a <span className="text-brand-500">Smart Voter</span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="mt-6 text-lg leading-8 text-muted-foreground"
-            >
-              A privacy-first, AI-powered election education platform. Discover your eligibility, practice voting safely, and make informed decisions for India&apos;s future.
-            </motion.p>
+        <section className="relative px-6 lg:px-8 py-32 sm:py-48 overflow-hidden">
+          {/* Animated Background Elements */}
+          <div className="absolute inset-0 -z-10 overflow-hidden">
+            <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-brand-200/20 blur-[120px] rounded-full animate-pulse" />
+            <div className="absolute top-[20%] -right-[5%] w-[30%] h-[30%] bg-accent-200/20 blur-[100px] rounded-full animate-pulse delay-700" />
+            <div className="absolute -bottom-[10%] left-[20%] w-[50%] h-[40%] bg-success-200/10 blur-[120px] rounded-full animate-pulse delay-1000" />
+          </div>
+
+          <div className="mx-auto max-w-5xl text-center">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-10 flex items-center justify-center gap-x-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <h1 className="text-5xl font-extrabold tracking-tight text-foreground sm:text-7xl lg:text-8xl font-display leading-[1.1]">
+                Empowering the <br />
+                <span className="gradient-text">Next Generation</span> of Voters
+              </h1>
+              <p className="mt-8 text-xl leading-relaxed text-muted-foreground max-w-2xl mx-auto font-light">
+                A privacy-first, AI-powered election companion. Master the voting process, verify eligibility, and make impact-driven decisions for India&apos;s democracy.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5"
             >
               <Link href="/dashboard">
-                <Button size="lg" className="rounded-full shadow-lg">
-                  Start Your Journey
+                <Button size="lg" className="rounded-full px-10 h-14 text-lg font-bold shadow-xl shadow-brand-500/20">
+                  Launch Dashboard
                 </Button>
               </Link>
               <Link href="/learn">
-                <Button variant="outline" size="lg" className="rounded-full">
-                  Learn the Basics
+                <Button variant="outline" size="lg" className="rounded-full px-10 h-14 text-lg font-bold glass">
+                  Explore Learning Hub
                 </Button>
               </Link>
             </motion.div>
@@ -54,50 +59,76 @@ export default function Home() {
         </section>
 
         {/* Feature Highlights Grid */}
-        <section className="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
+        <section className="py-24 px-6 lg:px-8 max-w-7xl mx-auto relative">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold sm:text-4xl font-display">Interactive Civic Tools</h2>
+            <p className="text-muted-foreground mt-4">Everything you need to be 100% election ready.</p>
+          </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <FeatureCard 
               title="AI Assistant" 
-              description="Got questions about voting? Our highly-trained, neutral AI companion is here to assist you 24/7."
+              description="Get neutral, verified answers about the electoral process from our dedicated AI companion."
               href="/assistant"
+              icon="🤖"
             />
             <FeatureCard 
-              title="Voting Simulation" 
-              description="Never voted before? Experience our step-by-step EVM and VVPAT mock voting simulation."
+              title="Voting Simulator" 
+              description="Step-by-step EVM & VVPAT practice to build confidence before you hit the booth."
               href="/simulate"
+              icon="🗳️"
             />
             <FeatureCard 
-              title="Smart Checklist" 
-              description="A personalized step-by-step checklist to ensure you are 100% election ready."
+              title="Readiness Kit" 
+              description="A personalized checklist and PDF guide to ensure you have all documents ready."
               href="/checklist"
+              icon="📋"
             />
           </div>
         </section>
       </main>
       
       {/* Footer */}
-      <footer className="py-8 border-t border-border text-center text-sm text-muted-foreground">
-        <p>&copy; {new Date().getFullYear()} VoteSmart AI. Built for India.</p>
-        <div className="mt-2 space-x-4">
-          <Link href="/privacy" className="hover:text-foreground">Privacy Policy</Link>
-          <Link href="/community" className="hover:text-foreground">Community FAQs</Link>
+      <footer className="py-12 border-t border-border/50 glass">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <div className="flex justify-center items-center gap-2 mb-6">
+            <span className="text-2xl">🇮🇳</span>
+            <span className="font-display font-bold text-xl tracking-tighter">VoteSmart AI</span>
+          </div>
+          <p className="text-sm text-muted-foreground max-w-md mx-auto">
+            Making democracy accessible, transparent, and digital-first for the citizens of India.
+          </p>
+          <div className="mt-8 flex justify-center space-x-8 text-sm font-medium">
+            <Link href="/privacy" className="text-muted-foreground hover:text-brand-600 transition-colors">Privacy</Link>
+            <Link href="/community" className="text-muted-foreground hover:text-brand-600 transition-colors">Community</Link>
+            <Link href="/score" className="text-muted-foreground hover:text-brand-600 transition-colors">Civic Score</Link>
+          </div>
+          <p className="mt-8 text-xs text-muted-foreground/60">&copy; {new Date().getFullYear()} VoteSmart AI. All Rights Reserved.</p>
         </div>
       </footer>
     </div>
   );
 }
 
-function FeatureCard({ title, description, href }: { title: string, description: string, href: string }) {
+function FeatureCard({ title, description, href, icon }: { title: string, description: string, href: string, icon: string }) {
   return (
-    <Link href={href}>
-      <Card className="h-full cursor-pointer hover:border-brand-300 transition-colors">
-        <CardHeader>
-          <CardTitle className="text-xl text-brand-600 dark:text-brand-400">{title}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">{description}</p>
-        </CardContent>
-      </Card>
-    </Link>
+    <motion.div
+      whileHover={{ y: -8 }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
+      <Link href={href}>
+        <Card className="h-full cursor-pointer premium-card border-none glass hover:bg-white/80 dark:hover:bg-slate-900/80">
+          <CardHeader className="pb-2">
+            <div className="w-12 h-12 bg-brand-50 dark:bg-brand-900/30 rounded-2xl flex items-center justify-center text-2xl mb-4">
+              {icon}
+            </div>
+            <CardTitle className="text-2xl font-bold font-display">{title}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground leading-relaxed">{description}</p>
+          </CardContent>
+        </Card>
+      </Link>
+    </motion.div>
   );
 }

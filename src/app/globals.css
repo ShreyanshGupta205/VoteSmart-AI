@@ -4,45 +4,80 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Primary Brand - Saffron/Orange */
-  --color-brand-50: #fff7ed;
-  --color-brand-100: #ffedd5;
-  --color-brand-200: #fed7aa;
-  --color-brand-300: #fdba74;
-  --color-brand-400: #fb923c;
-  --color-brand-500: #f97316;
-  --color-brand-600: #ea580c;
-  --color-brand-700: #c2410c;
+  /* Primary Brand - Saffron/Orange (Indian Tricolor) */
+  --color-brand-50: #fffaf0;
+  --color-brand-100: #feebc8;
+  --color-brand-200: #fbd38d;
+  --color-brand-300: #f6ad55;
+  --color-brand-400: #ed8936;
+  --color-brand-500: #dd6b20;
+  --color-brand-600: #c05621;
+  --color-brand-700: #9c4221;
 
-  /* Secondary Brand - Blue */
-  --color-accent-50: #eff6ff;
-  --color-accent-100: #dbeafe;
-  --color-accent-500: #3b82f6;
-  --color-accent-600: #2563eb;
+  /* Secondary Brand - Ashoka Blue */
+  --color-accent-50: #f0f9ff;
+  --color-accent-100: #e0f2fe;
+  --color-accent-500: #0ea5e9;
+  --color-accent-600: #0284c7;
+  --color-accent-700: #0369a1;
+
+  /* Tertiary - Deep Green */
+  --color-success-50: #f0fdf4;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
 
   /* Fonts */
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-poppins);
+  --font-sans: "Inter", var(--font-inter), sans-serif;
+  --font-display: "Outfit", var(--font-poppins), sans-serif;
+
+  /* Spacing & Borders */
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  
+  --shadow-premium: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
 }
 
 @layer base {
   :root {
-    --background: #ffffff;
-    --foreground: #09090b;
-    --muted: #f4f4f5;
-    --muted-foreground: #71717a;
-    --border: #e4e4e7;
-    --input: #e4e4e7;
-    --radius: 0.5rem;
+    --background: #fdfdfd;
+    --foreground: #1a1a1a;
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --radius: 0.75rem;
   }
 
   .dark {
-    --background: #09090b;
-    --foreground: #fafafa;
-    --muted: #27272a;
-    --muted-foreground: #a1a1aa;
-    --border: #27272a;
-    --input: #27272a;
+    --background: #0f172a;
+    --foreground: #f8fafc;
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
+    --border: #334155;
+    --input: #334155;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .dark .glass {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-accent-600;
+  }
+
+  .premium-card {
+    @apply bg-background border border-border shadow-premium hover:shadow-xl transition-all duration-300 rounded-xl;
   }
 }
 
@@ -53,6 +88,11 @@
   body {
     background-color: var(--background);
     color: var(--foreground);
-    @apply antialiased;
+    @apply antialiased selection:bg-brand-100 selection:text-brand-900;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight font-bold;
   }
 }
