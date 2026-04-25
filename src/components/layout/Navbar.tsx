@@ -6,6 +6,8 @@ import { m, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useStore } from "@/lib/store";
+import { useAuth } from "@/context/AuthContext";
+import { LoginModal } from "@/components/ui/LoginModal";
 
 const navItems = [
   { path: "/dashboard", label: "Dashboard" },
@@ -36,8 +38,10 @@ const mobileNav = [
 export function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
   const score = useStore((s) => s.score);
   const firstTimeVoter = useStore((s) => s.firstTimeVoter);
+  const { user, signOut, loading } = useAuth();
 
   return (
     <>
@@ -86,7 +90,7 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <div className="hidden sm:flex items-center gap-3 px-4 py-2 bg-white/50 dark:bg-slate-900/50 rounded-2xl border border-white/20 shadow-inner">
               {firstTimeVoter && (
                 <span className="px-2 py-0.5 rounded-full bg-brand-500 text-[10px] font-black text-white uppercase tracking-tighter">1st Timer</span>
@@ -104,6 +108,44 @@ export function Navbar() {
               </div>
             </div>
 
+            {/* Auth button */}
+            {!loading && (
+              user ? (
+                <div className="flex items-center gap-2">
+                  {user.photoURL && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={user.photoURL}
+                      alt={user.displayName ?? "User avatar"}
+                      width={36}
+                      height={36}
+                      className="w-9 h-9 rounded-full ring-2 ring-brand-400 object-cover"
+                    />
+                  )}
+                  <div className="hidden md:flex flex-col leading-none">
+                    <span className="text-xs font-black text-foreground truncate max-w-[80px]">{user.displayName?.split(" ")[0]}</span>
+                    <button
+                      onClick={signOut}
+                      className="text-[10px] text-muted-foreground hover:text-red-500 transition-colors font-semibold text-left"
+                      aria-label="Sign out"
+                    >
+                      Sign out
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  id="navbar-signin-btn"
+                  onClick={() => setLoginOpen(true)}
+                  className="hidden sm:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-xs font-black rounded-xl shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 hover:scale-105 transition-all duration-300 active:scale-95"
+                  aria-label="Sign in"
+                >
+                  <span>🔑</span>
+                  <span>Sign In</span>
+                </button>
+              )
+            )}
+
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-xl glass border border-white/20 hover:bg-white/20 transition-all"
@@ -115,6 +157,9 @@ export function Navbar() {
               <span className={cn("w-5 h-0.5 bg-foreground transition-all duration-300", mobileOpen && "-rotate-45 -translate-y-2")} />
             </button>
           </div>
+
+          {/* Login Modal */}
+          <LoginModal isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
         </div>
       </nav>
 
@@ -165,7 +210,30 @@ export function Navbar() {
                   </Link>
                 ))}
               </div>
-              <div className="p-4 border-t border-border">
+              <div className="p-4 border-t border-border space-y-2">
+                {/* Auth section in mobile */}
+                {!loading && (
+                  user ? (
+                    <div className="flex items-center gap-3 px-4 py-3 bg-brand-50 dark:bg-brand-900/20 rounded-xl mb-2">
+                      {user.photoURL && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={user.photoURL} alt={user.displayName ?? "User"} width={32} height={32} className="w-8 h-8 rounded-full ring-2 ring-brand-400" />
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-black text-foreground truncate">{user.displayName}</p>
+                        <button onClick={() => { signOut(); setMobileOpen(false); }} className="text-[10px] text-red-500 font-semibold">Sign out</button>
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => { setMobileOpen(false); setLoginOpen(true); }}
+                      className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-brand-500 to-brand-600 text-white rounded-xl font-bold text-sm mb-2"
+                      aria-label="Sign in"
+                    >
+                      🔑 Sign In with Google
+                    </button>
+                  )
+                )}
                 <Link href="/score" onClick={() => setMobileOpen(false)}>
                   <div className="w-full flex items-center justify-between px-4 py-3 bg-gradient-to-r from-brand-500 to-accent-500 text-white rounded-xl font-bold text-sm">
                     <span>My Readiness Score</span>

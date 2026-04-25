@@ -1,21 +1,26 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "dummy-api-key",
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "votesmart-ai.firebaseapp.com",
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "votesmart-ai",
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "votesmart-ai.appspot.com",
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "123456789",
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "1:123456789:web:abcdef",
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID || "G-ABCDEF123"
+  apiKey: "AIzaSyDj58BGR3qdvoTqBNpWFUda-5YXXV-CEqg",
+  authDomain: "votesmart-ai-2c2a5.firebaseapp.com",
+  projectId: "votesmart-ai-2c2a5",
+  storageBucket: "votesmart-ai-2c2a5.firebasestorage.app",
+  messagingSenderId: "443564959825",
+  appId: "1:443564959825:web:3db7f31f826c371fe87070",
+  measurementId: "G-3JCT8ZPWTL",
 };
 
-// Initialize Firebase
+// Initialize Firebase (safe for SSR)
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-// Initialize Analytics conditionally (only in browser)
-let analytics;
+// Auth & Google provider
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
+
+// Initialize Analytics conditionally (only in browser, not SSR)
+let analytics: ReturnType<typeof getAnalytics> | undefined;
 if (typeof window !== "undefined") {
   isSupported().then((supported) => {
     if (supported) {
@@ -24,4 +29,4 @@ if (typeof window !== "undefined") {
   });
 }
 
-export { app, analytics };
+export { app, auth, googleProvider, analytics };

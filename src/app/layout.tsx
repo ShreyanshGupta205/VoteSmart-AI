@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 };
 
 import { MotionProvider } from "@/components/providers/MotionProvider";
+import { AuthProvider } from "@/context/AuthContext";
 
 export default function RootLayout({
   children,
@@ -31,13 +32,15 @@ export default function RootLayout({
         <meta name="theme-color" content="#FF9933" />
       </head>
       <body className={`${inter.variable} ${poppins.variable} font-sans flex flex-col min-h-screen`}>
-        <MotionProvider>
-          <OfflineBanner />
-          <Navbar />
-          <main className="flex-grow">
-            {children}
-          </main>
-        </MotionProvider>
+        <AuthProvider>
+          <MotionProvider>
+            <OfflineBanner />
+            <Navbar />
+            <main className="flex-grow">
+              {children}
+            </main>
+          </MotionProvider>
+        </AuthProvider>
       </body>
     </html>
   );
