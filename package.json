@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.64",
     "@ai-sdk/openai": "^3.0.53",
     "@ai-sdk/react": "^3.0.170",
     "@google/generative-ai": "^0.24.1",
@@ -16,6 +17,7 @@
     "ai": "^6.0.168",
     "clsx": "^2.1.1",
     "dotenv": "^17.4.2",
+    "firebase": "^12.12.1",
     "framer-motion": "^12.38.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^4.2.1",

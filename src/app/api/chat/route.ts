@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { openai } from "@ai-sdk/openai";
+import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
 
 const SYSTEM_INSTRUCTION = `
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
     }
 
     const result = streamText({
-      model: openai("gpt-4o-mini"),
+      model: google("gemini-1.5-flash"),
       system: SYSTEM_INSTRUCTION,
       messages,
     });
