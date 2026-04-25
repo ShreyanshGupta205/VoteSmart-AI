@@ -1,6 +1,7 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDj58BGR3qdvoTqBNpWFUda-5YXXV-CEqg",
@@ -15,8 +16,9 @@ const firebaseConfig = {
 // Initialize Firebase (safe for SSR)
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-// Auth & Google provider
+// Services
 const auth = getAuth(app);
+const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 
 // Initialize Analytics conditionally (only in browser, not SSR)
@@ -29,4 +31,4 @@ if (typeof window !== "undefined") {
   });
 }
 
-export { app, auth, googleProvider, analytics };
+export { app, auth, db, googleProvider, analytics };

@@ -15,7 +15,7 @@ export default function ScorePage() {
   useEffect(() => {
     const target = breakdown.total;
     let current = 0;
-    if (target === 0) { setAnimatedScore(0); return; }
+    if (target === 0) return;
     const interval = setInterval(() => {
       if (current >= target) { clearInterval(interval); setAnimatedScore(target); }
       else { current += 1; setAnimatedScore(current); }

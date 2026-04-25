@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
-import { Card, CardContent } from "@/components/ui/Card";
 
 type CorrectionType = "missing-name" | "wrong-details" | "duplicate" | null;
 

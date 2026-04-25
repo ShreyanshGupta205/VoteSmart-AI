@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 
 export default function OfflineBanner() {
-  const [isOffline, setIsOffline] = useState(false);
+  const [isOffline, setIsOffline] = useState(() => {
+    if (typeof navigator !== "undefined") return !navigator.onLine;
+    return false;
+  });
 
   useEffect(() => {
     // Register service worker
@@ -14,8 +17,6 @@ export default function OfflineBanner() {
 
     const handleOffline = () => setIsOffline(true);
     const handleOnline = () => setIsOffline(false);
-
-    setIsOffline(!navigator.onLine);
     window.addEventListener("offline", handleOffline);
     window.addEventListener("online", handleOnline);
 

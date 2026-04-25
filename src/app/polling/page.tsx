@@ -81,10 +81,10 @@ export default function PollingPage() {
         </CardContent>
       </Card>
 
-      {/* Step-by-step guide */}
+      {/* Step-by-step guide and Map */}
       <AnimatePresence>
         {showGuide && (
-          <m.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+          <m.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card className="border-2 border-gray-100 dark:border-gray-800 shadow-lg rounded-2xl">
               <CardHeader>
                 <CardTitle className="text-xl font-bold">
@@ -108,10 +108,34 @@ export default function PollingPage() {
                     <Button className="w-full h-11 rounded-xl font-bold bg-brand-500 hover:bg-brand-600">Find on Electoral Search →</Button>
                   </a>
                   <a href={mapsUrl} target="_blank" rel="noreferrer" className="flex-1">
-                    <Button variant="outline" className="w-full h-11 rounded-xl font-bold border-2">Open Google Maps →</Button>
+                    <Button variant="outline" className="w-full h-11 rounded-xl font-bold border-2">Open App →</Button>
                   </a>
                 </div>
               </CardContent>
+            </Card>
+
+            {/* Interactive Map Embed */}
+            <Card className="border-2 border-gray-100 dark:border-gray-800 shadow-lg rounded-2xl overflow-hidden">
+              <div className="w-full h-full min-h-[400px] relative bg-gray-100 dark:bg-gray-900">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  className="absolute inset-0"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src={`https://www.google.com/maps/embed/v1/search?key=AIzaSyDj58BGR3qdvoTqBNpWFUda-5YXXV-CEqg&q=${encodeURIComponent(mapsQuery)}`}
+                  title="Polling Booth Location Map"
+                  aria-label="Google Maps view showing polling booths"
+                />
+                <div className="absolute top-4 left-4 right-4 pointer-events-none">
+                  <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-3 rounded-xl border border-white/20 shadow-lg inline-block pointer-events-auto">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Current Search</p>
+                    <p className="text-xs font-bold text-foreground">{mapsQuery}</p>
+                  </div>
+                </div>
+              </div>
             </Card>
           </m.div>
         )}

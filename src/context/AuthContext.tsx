@@ -8,6 +8,7 @@ import {
   User,
 } from "firebase/auth";
 import { auth, googleProvider } from "@/lib/firebase";
+import { trackEvent, APP_EVENTS } from "@/lib/analytics";
 
 interface AuthContextType {
   user: User | null;
@@ -37,7 +38,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signInWithGoogle = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
+      const result = await signInWithPopup(auth, googleProvider);
+      if (result.user) {
+        trackEvent(APP_EVENTS.LOGIN_SUCCESS, { method: "google" });
+      }
     } catch (error) {
       console.error("Sign-in error:", error);
     }
@@ -46,6 +50,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = async () => {
     try {
       await firebaseSignOut(auth);
+      trackEvent(APP_EVENTS.SIGN_OUT);
     } catch (error) {
       console.error("Sign-out error:", error);
     }

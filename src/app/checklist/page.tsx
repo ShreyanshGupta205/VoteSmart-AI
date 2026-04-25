@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { m, AnimatePresence } from "framer-motion";
@@ -36,18 +36,18 @@ function getDaysLeft() {
 
 export default function ChecklistPage() {
   const { selectedState, setSelectedState, remindersSet, toggleReminder, updateChecklist } = useStore();
-  const [completed, setCompleted] = useState<string[]>([]);
+  const [completed, setCompleted] = useState<string[]>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("checklist-progress-v2");
+      try { return saved ? JSON.parse(saved) : []; } catch { return []; }
+    }
+    return [];
+  });
   const [daysLeft] = useState(getDaysLeft());
 
   const stateInfo = states.find((s) => s.code === selectedState);
 
-  // Load persisted checklist from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("checklist-progress-v2");
-    if (saved) {
-      try { setCompleted(JSON.parse(saved)); } catch { /* ignore */ }
-    }
-  }, []);
+  // Persistence is handled in toggleItem via localStorage.setItem
 
   const toggleItem = (id: string) => {
     setCompleted((prev) => {

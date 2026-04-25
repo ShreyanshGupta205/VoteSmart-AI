@@ -174,6 +174,8 @@ export default function DecisionTreePage() {
   const currentNodeId = history[history.length - 1];
   const currentNode = treeData[currentNodeId];
 
+  const resultStyle = currentNode.resultType ? resultStyles[currentNode.resultType] : resultStyles.info;
+
   const handleOption = (nextId: string) => setHistory([...history, nextId]);
   const handleBack = () => { if (history.length > 1) setHistory(history.slice(0, -1)); };
   const reset = () => setHistory(["start"]);
@@ -185,9 +187,6 @@ export default function DecisionTreePage() {
     if (!node.question) return (node.result ? node.result.slice(0, 20) + "…" : id);
     return node.question.length > 30 ? node.question.slice(0, 30) + "…" : node.question;
   });
-
-  const isResult = !currentNode.question;
-  const resultStyle = currentNode.resultType ? resultStyles[currentNode.resultType] : resultStyles.info;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] p-4 md:p-8">

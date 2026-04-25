@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/Input";
 import { Card, CardContent } from "@/components/ui/Card";
 import { m, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { trackEvent, APP_EVENTS } from "@/lib/analytics";
 
 interface ISpeechRecognition {
   continuous: boolean;
@@ -80,6 +81,7 @@ export default function AssistantPage() {
     e.preventDefault();
     if (!input.trim()) return;
     const text = input;
+    trackEvent(APP_EVENTS.CHAT_QUERY, { query: text, type: "manual_input" });
     setInput("");
     if (sendMessage) {
       await sendMessage({ text });
@@ -87,12 +89,15 @@ export default function AssistantPage() {
   };
 
   const handleQuickReply = (qr: string) => {
+    trackEvent(APP_EVENTS.CHAT_QUERY, { query: qr, type: "quick_action" });
     const instant = INSTANT_RESPONSES[qr];
     if (instant) {
+      const userMsgId = `user-${messages.length}-${Math.random().toString(36).slice(2, 9)}`;
+      const aiMsgId = `ai-${messages.length}-${Math.random().toString(36).slice(2, 9)}`;
       setMessages([
         ...messages,
-        { id: Date.now().toString(), role: "user", parts: [{ type: "text", text: qr }] } as UIMessage,
-        { id: (Date.now() + 1).toString(), role: "assistant", parts: [{ type: "text", text: instant }] } as UIMessage
+        { id: userMsgId, role: "user", parts: [{ type: "text", text: qr }] } as UIMessage,
+        { id: aiMsgId, role: "assistant", parts: [{ type: "text", text: instant }] } as UIMessage
       ]);
     } else {
       setInput(qr);
@@ -127,7 +132,7 @@ export default function AssistantPage() {
                     <span className="text-[10px] font-black uppercase tracking-widest">{msg.role === 'user' ? 'You' : '🤖 Assistant'}</span>
                   </div>
                   <div className="text-[15px] whitespace-pre-wrap leading-relaxed space-y-2">
-                    {msg.parts.map((part, i) => (part.type === 'text' ? part.text : null))}
+                    {msg.parts.map((part) => (part.type === 'text' ? part.text : null))}
                   </div>
                 </div>
               </m.div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { problems } from "@/data/problems";
@@ -8,18 +8,16 @@ import { useStore } from "@/lib/store";
 import { Button } from "@/components/ui/Button";
 
 export default function SolvePage() {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(() => {
+    if (typeof window !== "undefined") {
+      return new URLSearchParams(window.location.search).get("problem");
+    }
+    return null;
+  });
   const [expandedStep, setExpandedStep] = useState<number | null>(null);
   const { problemsSolved, markProblemSolved } = useStore();
 
-  // Auto-select problem from URL query (e.g., ?problem=name-missing)
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const id = params.get("problem");
-      if (id) setSelectedId(id);
-    }
-  }, []);
+  // Auto-selection handled via state initializer above
 
   const selectedProblem = problems.find((p) => p.id === selectedId);
   const isSolved = selectedId ? problemsSolved.includes(selectedId) : false;

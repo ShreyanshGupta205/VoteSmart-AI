@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { google } from "@ai-sdk/google";
-import { streamText } from "ai";
+import { streamText, convertToModelMessages } from "ai";
 
 const SYSTEM_INSTRUCTION = `
 You are the VoteSmart AI Civic Companion for Indian citizens.
@@ -36,20 +36,35 @@ export async function POST(req: NextRequest) {
     // 2. Process Request
     const { messages } = await req.json();
 
-    if (!messages) {
-      return new Response(JSON.stringify({ error: "Messages are required" }), { status: 400 });
+    if (!messages || !Array.isArray(messages)) {
+      return new Response(JSON.stringify({ error: "Invalid messages provided" }), { status: 400 });
     }
+
+    // Security: Limit history length
+    if (messages.length > 20) {
+      return new Response(JSON.stringify({ error: "Chat history too long" }), { status: 400 });
+    }
+
+    // Quality: Check content length of the last message
+    const lastMessage = messages[messages.length - 1];
+    const lastContent = JSON.stringify(lastMessage.parts || "");
+    if (lastContent.length > 2000) {
+      return new Response(JSON.stringify({ error: "Message too long" }), { status: 400 });
+    }
+
+    // Convert UI messages to model messages
+    const modelMessages = await convertToModelMessages(messages);
 
     const result = streamText({
       model: google("gemini-flash-latest"),
       system: SYSTEM_INSTRUCTION,
-      messages,
+      messages: modelMessages,
     });
 
     return result.toUIMessageStreamResponse();
 
   } catch (error) {
     console.error("Chat API Error:", error);
-    return new Response(JSON.stringify({ error: "Failed to generate response" }), { status: 500 });
+    return new Response(JSON.stringify({ error: "Failed to process chat" }), { status: 500 });
   }
 }
