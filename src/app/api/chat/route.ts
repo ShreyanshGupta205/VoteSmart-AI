@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
     }
 
     const result = streamText({
-      model: google("gemini-1.5-flash"),
+      model: google("gemini-flash-latest"),
       system: SYSTEM_INSTRUCTION,
       messages,
     });
