@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 type Post = {
   id: string;
@@ -85,7 +85,7 @@ export default function CommunityPage() {
         <h2 className="text-xl font-bold font-display">Recent Questions</h2>
         <AnimatePresence>
           {posts.map((post) => (
-            <motion.div key={post.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+            <m.div key={post.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
               <Card className="overflow-hidden hover:shadow-md transition-shadow">
                 <CardHeader className="pb-2 bg-muted/30">
                   <div className="flex justify-between items-start">
@@ -119,7 +119,7 @@ export default function CommunityPage() {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </m.div>
           ))}
         </AnimatePresence>
       </div>

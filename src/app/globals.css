@@ -3,6 +3,10 @@
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-input: var(--input);
 
   /* Indian Tricolor (Tiranga) - Official HEX Codes */
   --color-brand-50: #fff9f5;
@@ -87,8 +91,13 @@
   body {
     background-color: var(--background);
     color: var(--foreground);
-    @apply antialiased selection:bg-brand-100 selection:text-brand-900;
+    @apply antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  ::selection {
+    background-color: #fff0e6; /* brand-100 */
+    color: #cc7a29; /* brand-700 */
   }
   
   h1, h2, h3, h4, h5, h6 {

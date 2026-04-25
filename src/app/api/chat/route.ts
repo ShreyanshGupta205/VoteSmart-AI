@@ -12,8 +12,28 @@ CRITICAL RULES:
 - Your tone should be encouraging, clear, and simple.
 `;
 
+// Simple in-memory rate limiter (resets on server restart)
+const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
+
 export async function POST(req: NextRequest) {
   try {
+    // 1. Basic Rate Limiting
+    const ip = req.headers.get("x-forwarded-for") || "127.0.0.1";
+    const now = Date.now();
+    const limitWindow = 60000; // 1 minute
+    const maxRequests = 10;
+
+    const rateData = rateLimitMap.get(ip);
+    if (rateData && now - rateData.timestamp < limitWindow) {
+      if (rateData.count >= maxRequests) {
+        return new Response(JSON.stringify({ error: "Too many requests. Please try again later." }), { status: 429 });
+      }
+      rateData.count++;
+    } else {
+      rateLimitMap.set(ip, { count: 1, timestamp: now });
+    }
+
+    // 2. Process Request
     const { messages } = await req.json();
 
     if (!messages) {

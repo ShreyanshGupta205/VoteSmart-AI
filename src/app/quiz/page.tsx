@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 const quizQuestions = [
@@ -68,7 +68,7 @@ export default function QuizPage() {
 
       <AnimatePresence mode="wait">
         {!showResult ? (
-          <motion.div key="quiz" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
+          <m.div key="quiz" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
             <Card className="border-brand-200">
               <CardHeader className="bg-brand-50/50 dark:bg-brand-900/10 border-b border-border">
                 <div className="flex justify-between text-sm text-muted-foreground mb-2">
@@ -112,19 +112,19 @@ export default function QuizPage() {
                 </div>
 
                 {isAnswered && (
-                  <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="mt-6 p-4 bg-brand-50 rounded-lg border border-brand-100 text-sm text-brand-800 dark:bg-brand-900/20 dark:text-brand-300">
+                  <m.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="mt-6 p-4 bg-brand-50 rounded-lg border border-brand-100 text-sm text-brand-800 dark:bg-brand-900/20 dark:text-brand-300">
                     <p className="font-semibold mb-1">Explanation:</p>
                     <p>{quizQuestions[currentQuestion].explanation}</p>
                     <Button onClick={nextQuestion} className="w-full mt-4">
                       {currentQuestion < quizQuestions.length - 1 ? "Next Question" : "See Results"}
                     </Button>
-                  </motion.div>
+                  </m.div>
                 )}
               </CardContent>
             </Card>
-          </motion.div>
+          </m.div>
         ) : (
-          <motion.div key="result" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
+          <m.div key="result" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
             <Card className="text-center p-8 border-brand-200 bg-brand-50 dark:bg-brand-900/10">
               <CardContent className="space-y-6">
                 <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto shadow-md">
@@ -144,7 +144,7 @@ export default function QuizPage() {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

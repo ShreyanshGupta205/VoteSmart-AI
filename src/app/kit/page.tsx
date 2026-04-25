@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 export default function PersonalElectionKit() {
   const kitRef = useRef<HTMLDivElement>(null);
@@ -45,7 +45,7 @@ export default function PersonalElectionKit() {
         </Button>
       </div>
 
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+      <m.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
         <Card className="border-brand-200 overflow-hidden shadow-lg">
           {/* This is the area that gets captured */}
           <div ref={kitRef} className="bg-white dark:bg-background p-8 min-h-[600px]">
@@ -112,7 +112,7 @@ export default function PersonalElectionKit() {
             </div>
           </div>
         </Card>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

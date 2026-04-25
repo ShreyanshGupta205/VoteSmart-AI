@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { motion, HTMLMotionProps } from "framer-motion";
+import { m, HTMLMotionProps } from "framer-motion";
 
 export const Card = React.forwardRef<HTMLDivElement, HTMLMotionProps<"div">>(
   ({ className, ...props }, ref) => (
-    <motion.div
+    <m.div
       ref={ref}
       whileHover={{ y: -5 }}
       transition={{ type: "spring", stiffness: 300 }}
