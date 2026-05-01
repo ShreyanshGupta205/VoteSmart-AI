@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { m } from "framer-motion";
-import { Github, Linkedin, Instagram } from "lucide-react";
+import { GithubIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 
 const footerLinks = [
   {
@@ -59,13 +59,13 @@ export function Footer() {
             </p>
             <div className="flex gap-4">
               <a href="https://github.com/ShreyanshGupta205" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-                <Github className="w-5 h-5" />
+                <GithubIcon className="w-5 h-5" />
               </a>
               <a href="https://www.linkedin.com/in/shreyanshgupta205/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-blue-600 transition-colors">
-                <Linkedin className="w-5 h-5" />
+                <LinkedinIcon className="w-5 h-5" />
               </a>
               <a href="https://www.instagram.com/shreyanshg2005/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-pink-500 transition-colors">
-                <Instagram className="w-5 h-5" />
+                <InstagramIcon className="w-5 h-5" />
               </a>
             </div>
           </div>

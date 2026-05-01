@@ -2,7 +2,8 @@
 
 import { m } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/Card";
-import { Mail, MessageSquare, Github, Linkedin, Instagram, Clock, AlertCircle } from "lucide-react";
+import { Mail, MessageSquare, Clock, AlertCircle } from "lucide-react";
+import { GithubIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 
 export default function ContactPage() {
   return (
@@ -83,13 +84,13 @@ export default function ContactPage() {
         </div>
         <div className="flex gap-4">
           <a href="https://github.com/ShreyanshGupta205" target="_blank" rel="noopener noreferrer" className="p-4 rounded-2xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
-            <Github className="w-6 h-6 text-foreground" />
+            <GithubIcon className="w-6 h-6 text-foreground" />
           </a>
           <a href="https://www.instagram.com/shreyanshg2005/" target="_blank" rel="noopener noreferrer" className="p-4 rounded-2xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
-            <Instagram className="w-6 h-6 text-pink-500" />
+            <InstagramIcon className="w-6 h-6 text-pink-500" />
           </a>
           <a href="https://www.linkedin.com/in/shreyanshgupta205/" target="_blank" rel="noopener noreferrer" className="p-4 rounded-2xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
-            <Linkedin className="w-6 h-6 text-blue-600" />
+            <LinkedinIcon className="w-6 h-6 text-blue-600" />
           </a>
         </div>
       </div>
