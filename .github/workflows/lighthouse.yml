@@ -1,0 +1,26 @@
+name: Lighthouse CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lighthouse:
+    name: Lighthouse Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Audit production URL with Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://votesmart-ai-645235868525.us-central1.run.app/
+            https://votesmart-ai-645235868525.us-central1.run.app/assistant
+            https://votesmart-ai-645235868525.us-central1.run.app/simulate
+          budgetPath: ./.github/lighthouse/budget.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
