@@ -58,13 +58,13 @@ export function Footer() {
               Making democracy accessible, transparent, and digital-first for the citizens of India.
             </p>
             <div className="flex gap-4">
-              <a href="https://github.com/ShreyanshGupta205" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="https://github.com/ShreyanshGupta205" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-muted-foreground hover:text-foreground transition-colors">
                 <GithubIcon className="w-5 h-5" />
               </a>
-              <a href="https://www.linkedin.com/in/shreyanshgupta205/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-blue-600 transition-colors">
+              <a href="https://www.linkedin.com/in/shreyanshgupta205/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-muted-foreground hover:text-blue-600 transition-colors">
                 <LinkedinIcon className="w-5 h-5" />
               </a>
-              <a href="https://www.instagram.com/shreyanshg2005/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-pink-500 transition-colors">
+              <a href="https://www.instagram.com/shreyanshg2005/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-muted-foreground hover:text-pink-500 transition-colors">
                 <InstagramIcon className="w-5 h-5" />
               </a>
             </div>

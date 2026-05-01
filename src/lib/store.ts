@@ -7,7 +7,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-type StoreState = {
+export type StoreState = {
   // Core scores
   score: number;
   userName: string;

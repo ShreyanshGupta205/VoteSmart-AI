@@ -8,11 +8,24 @@ jest.mock('@ai-sdk/react', () => ({
   useChat: jest.fn(),
 }));
 
-// Mock Framer Motion
+// Mock Framer Motion — filters out motion-specific props so DOM elements stay clean
 jest.mock('framer-motion', () => {
   const React = require('react');
+  // Props that framer-motion uses but are not valid HTML attributes
+  const MOTION_PROPS = new Set([
+    'initial', 'animate', 'exit', 'whileHover', 'whileTap', 'whileFocus',
+    'whileInView', 'transition', 'variants', 'layout', 'layoutId',
+    'viewport', 'drag', 'dragConstraints', 'onDragEnd', 'onAnimationComplete',
+  ]);
+
   const mockComponent = (tag: string) => {
-    const Component = ({ children, className, ...props }: any) => React.createElement(tag, { className, ...props }, children);
+    const Component = ({ children, ...props }: any) => {
+      const domProps: any = {};
+      for (const key of Object.keys(props)) {
+        if (!MOTION_PROPS.has(key)) domProps[key] = props[key];
+      }
+      return React.createElement(tag, domProps, children);
+    };
     Component.displayName = `mock-${tag}`;
     return Component;
   };
@@ -27,9 +40,11 @@ jest.mock('framer-motion', () => {
     },
     AnimatePresence: ({ children }: any) => <>{children}</>,
     LazyMotion: ({ children }: any) => <>{children}</>,
+    MotionConfig: ({ children }: any) => <>{children}</>,
     domAnimation: {},
   };
 });
+
 
 // Mock Analytics
 jest.mock('../src/lib/analytics', () => ({
