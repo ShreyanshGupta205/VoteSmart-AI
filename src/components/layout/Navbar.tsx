@@ -35,6 +35,8 @@ const mobileNav = [
   { path: "/score", label: "My Score", icon: "⭐" },
 ];
 
+import Image from "next/image";
+
 export function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -113,8 +115,7 @@ export function Navbar() {
               user ? (
                 <div className="flex items-center gap-2">
                   {user.photoURL && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <Image
                       src={user.photoURL}
                       alt={user.displayName ?? "User avatar"}
                       width={36}
@@ -216,8 +217,7 @@ export function Navbar() {
                   user ? (
                     <div className="flex items-center gap-3 px-4 py-3 bg-brand-50 dark:bg-brand-900/20 rounded-xl mb-2">
                       {user.photoURL && (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={user.photoURL} alt={user.displayName ?? "User"} width={32} height={32} className="w-8 h-8 rounded-full ring-2 ring-brand-400" />
+                        <Image src={user.photoURL} alt={user.displayName ?? "User"} width={32} height={32} className="w-8 h-8 rounded-full ring-2 ring-brand-400" />
                       )}
                       <div className="flex-1 min-w-0">
                         <p className="text-xs font-black text-foreground truncate">{user.displayName}</p>
