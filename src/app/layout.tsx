@@ -16,8 +16,7 @@ export const metadata: Metadata = {
   title: "VoteSmart AI - India's Civic Companion",
   description: "A privacy-first, AI-powered election education and voting readiness platform for India. Neutral, verified, and accessible.",
   keywords: ["elections india", "voter registration", "voting guide", "civic education", "evm simulation", "voter id india", "votesmart ai"],
-  authors: [{ name: "VoteSmart Team" }],
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+  authors: [{ name: "Shreyansh Gupta" }],
   openGraph: {
     title: "VoteSmart AI - India's Civic Companion",
     description: "The AI-powered guide for every Indian voter. Neutral and privacy-first.",
@@ -32,9 +31,17 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 import { MotionProvider } from "@/components/providers/MotionProvider";
 import { AuthProvider } from "@/context/AuthContext";
 import { DataSync } from "@/components/utils/DataSync";
+
+import { Footer } from "@/components/layout/Footer";
 
 export default function RootLayout({
   children,
@@ -59,9 +66,11 @@ export default function RootLayout({
             <main id="main-content" className="flex-grow">
               {children}
             </main>
+            <Footer />
           </MotionProvider>
         </AuthProvider>
       </body>
     </html>
   );
 }
+

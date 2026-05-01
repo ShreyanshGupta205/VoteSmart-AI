@@ -119,24 +119,6 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="py-12 border-t border-border/50 glass">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <div className="flex justify-center items-center gap-2 mb-6">
-            <span className="text-2xl">🇮🇳</span>
-            <span className="font-display font-bold text-xl tracking-tighter">VoteSmart AI</span>
-          </div>
-          <p className="text-sm text-muted-foreground max-w-md mx-auto">Making democracy accessible, transparent, and digital-first for the citizens of India.</p>
-          <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm font-medium">
-            <Link href="/privacy" className="text-muted-foreground hover:text-brand-600 transition-colors">Privacy</Link>
-            <Link href="/solve" className="text-muted-foreground hover:text-brand-600 transition-colors">Problem Solver</Link>
-            <Link href="/impact" className="text-muted-foreground hover:text-brand-600 transition-colors">Voting Impact</Link>
-            <Link href="/first-time" className="text-muted-foreground hover:text-brand-600 transition-colors">First-Time Voters</Link>
-            <Link href="/score" className="text-muted-foreground hover:text-brand-600 transition-colors">Civic Score</Link>
-          </div>
-          <p className="mt-8 text-xs text-muted-foreground/60">&copy; {new Date().getFullYear()} VoteSmart AI. All Rights Reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 }
@@ -158,3 +140,4 @@ function FeatureCard({ title, description, href, icon, delay }: { title: string;
     </m.div>
   );
 }
+
