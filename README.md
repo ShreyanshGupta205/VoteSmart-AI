@@ -1,6 +1,5 @@
 <div align="center">
 
-<img src="https://vote-smart-ai.vercel.app/favicon.ico" width="80" height="80" alt="VoteSmart AI Logo" />
 
 # 🗳️ VoteSmart AI
 
