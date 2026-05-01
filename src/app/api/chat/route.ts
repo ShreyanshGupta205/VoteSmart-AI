@@ -62,7 +62,6 @@ export async function POST(req: NextRequest) {
       temperature: 0.2, // Low temperature for high neutrality and factual accuracy
       topP: 0.8,
       topK: 40,
-      maxTokens: 1000,
     });
 
     return result.toUIMessageStreamResponse();
