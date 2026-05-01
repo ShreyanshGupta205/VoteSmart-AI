@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import { google } from "@ai-sdk/google";
 import { streamText, convertToModelMessages } from "ai";
 
+
 const SYSTEM_INSTRUCTION = `
 You are the VoteSmart AI Civic Companion for Indian citizens.
 Your core objective is clear: Educate users about elections, guide them through the voting journey, and maintain 100% political neutrality.
@@ -62,6 +63,10 @@ export async function POST(req: NextRequest) {
       temperature: 0.2, // Low temperature for high neutrality and factual accuracy
       topP: 0.8,
       topK: 40,
+      // Enable Google Search grounding for live electoral data accuracy
+      providerOptions: {
+        google: { useSearchGrounding: true },
+      },
     });
 
     return result.toUIMessageStreamResponse();

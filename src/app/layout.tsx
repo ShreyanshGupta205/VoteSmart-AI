@@ -51,6 +51,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="antialiased">
       <head>
+        {/* Performance: preconnect to external origins */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://identitytoolkit.googleapis.com" />
+        <link rel="preconnect" href="https://firebaseinstallations.googleapis.com" />
         <link rel="manifest" href="/manifest.webmanifest" />
         <meta name="theme-color" content="#FF9933" />
       </head>
