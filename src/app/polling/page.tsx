@@ -126,8 +126,8 @@ export default function PollingPage() {
                   allowFullScreen
                   referrerPolicy="no-referrer-when-downgrade"
                   src={`https://www.google.com/maps/embed/v1/search?key=AIzaSyDj58BGR3qdvoTqBNpWFUda-5YXXV-CEqg&q=${encodeURIComponent(mapsQuery)}`}
-                  title="Polling Booth Location Map"
-                  aria-label="Google Maps view showing polling booths"
+                  title="Official Polling Booth Locations - Google Maps"
+                  aria-label="Interactive map showing polling booths in your selected district"
                 />
                 <div className="absolute top-4 left-4 right-4 pointer-events-none">
                   <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-3 rounded-xl border border-white/20 shadow-lg inline-block pointer-events-auto">

@@ -13,8 +13,23 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "VoteSmart AI - Civic Companion",
-  description: "A privacy-first, AI-powered election education and voting readiness platform for India.",
+  title: "VoteSmart AI - India's Civic Companion",
+  description: "A privacy-first, AI-powered election education and voting readiness platform for India. Neutral, verified, and accessible.",
+  keywords: ["elections india", "voter registration", "voting guide", "civic education", "evm simulation", "voter id india", "votesmart ai"],
+  authors: [{ name: "VoteSmart Team" }],
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+  openGraph: {
+    title: "VoteSmart AI - India's Civic Companion",
+    description: "The AI-powered guide for every Indian voter. Neutral and privacy-first.",
+    type: "website",
+    locale: "en_IN",
+    siteName: "VoteSmart AI",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VoteSmart AI",
+    description: "Your digital guide to Indian elections.",
+  },
 };
 
 import { MotionProvider } from "@/components/providers/MotionProvider";

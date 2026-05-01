@@ -92,8 +92,8 @@ export default function AssistantPage() {
     trackEvent(APP_EVENTS.CHAT_QUERY, { query: qr, type: "quick_action" });
     const instant = INSTANT_RESPONSES[qr];
     if (instant) {
-      const userMsgId = `user-${messages.length}-${Math.random().toString(36).slice(2, 9)}`;
-      const aiMsgId = `ai-${messages.length}-${Math.random().toString(36).slice(2, 9)}`;
+      const userMsgId = `user-${messages.length}-${crypto.randomUUID().slice(0, 8)}`;
+      const aiMsgId = `ai-${messages.length}-${crypto.randomUUID().slice(0, 8)}`;
       setMessages([
         ...messages,
         { id: userMsgId, role: "user", parts: [{ type: "text", text: qr }] } as UIMessage,
@@ -115,6 +115,11 @@ export default function AssistantPage() {
           Civic <span className="gradient-text">Assistant</span>
         </h1>
         <p className="text-muted-foreground mt-2 text-lg font-light">Ask anything about India&apos;s electoral process — voice support included</p>
+        <div className="mt-4 flex justify-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-brand-600/60">
+          <span className="flex items-center gap-1">🛡️ Privacy First</span>
+          <span className="flex items-center gap-1">⚖️ 100% Neutral</span>
+          <span className="flex items-center gap-1">✅ Verified Info</span>
+        </div>
       </div>
 
       <Card className="flex-grow flex flex-col overflow-hidden glass border-white/20 shadow-premium rounded-2xl mb-4">
@@ -147,12 +152,12 @@ export default function AssistantPage() {
               </div>
             </m.div>
           )}
-          <div ref={endOfMessagesRef} className="h-4" />
+          <div ref={endOfMessagesRef} className="h-4" aria-hidden="true" />
         </CardContent>
 
-        <div className="p-4 md:p-6 glass border-t border-white/20 bg-white/40 dark:bg-slate-950/40">
+        <div className="p-4 md:p-6 glass border-t border-white/20 bg-white/40 dark:bg-slate-950/40" role="region" aria-label="Chat controls">
           {/* Quick actions */}
-          <div className="flex gap-2 pb-4 overflow-x-auto no-scrollbar">
+          <div className="flex gap-2 pb-4 overflow-x-auto no-scrollbar" role="group" aria-label="Quick questions">
             {quickReplies.map((qr) => (
               <Button key={qr} variant="outline" size="sm" onClick={() => handleQuickReply(qr)}
                 className="whitespace-nowrap text-xs font-bold rounded-xl glass border-brand-100/50 hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all duration-300 flex-shrink-0">
@@ -184,7 +189,7 @@ export default function AssistantPage() {
             </div>
           </form>
           <p className="text-center mt-3 text-[10px] text-muted-foreground/60 uppercase font-black tracking-widest">
-            Verified by Election Information Model • AI can occasionally be incorrect
+            Verified by Election Information Model • AI can occasionally be incorrect • No personal data is stored
           </p>
         </div>
       </Card>

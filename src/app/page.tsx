@@ -15,10 +15,10 @@ const features = [
 ];
 
 const problems = [
-  { label: "I don't know if I'm registered", href: "/solve?problem=not-registered" },
-  { label: "My name is missing from voter list", href: "/solve?problem=name-missing" },
-  { label: "I don't have a Voter ID", href: "/solve?problem=no-voter-id" },
-  { label: "I'm confused about the process", href: "/solve?problem=confused-process" },
+  { label: "I don't know if I'm registered", href: "/solve?problem=not-registered", icon: "❓" },
+  { label: "My name is missing from voter list", href: "/solve?problem=name-missing", icon: "🔍" },
+  { label: "I don't have a Voter ID", href: "/solve?problem=no-voter-id", icon: "🆔" },
+  { label: "I'm confused about the process", href: "/solve?problem=confused-process", icon: "🤔" },
 ];
 
 export default function Home() {
@@ -73,11 +73,11 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {problems.map((p, i) => (
               <m.div key={p.href} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
-                <Link href={p.href}>
-                  <div className="flex items-center gap-4 p-5 rounded-2xl border-2 border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/50 hover:border-brand-200 hover:bg-brand-50 dark:hover:bg-brand-900/20 hover:shadow-md transition-all duration-300 group cursor-pointer">
-                    <span className="text-2xl">❓</span>
+                <Link href={p.href} aria-label={`Solve issue: ${p.label}`}>
+                  <div className="flex items-center gap-4 p-5 rounded-2xl border-2 border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/50 hover:border-brand-200 hover:bg-brand-50 dark:hover:bg-brand-900/20 hover:shadow-md transition-all duration-300 group cursor-pointer" role="button">
+                    <span className="text-2xl" role="img" aria-hidden="true">{p.icon || '❓'}</span>
                     <span className="font-semibold text-sm text-foreground group-hover:text-brand-600 transition-colors">{p.label}</span>
-                    <span className="ml-auto text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
+                    <span className="ml-auto text-muted-foreground group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
                   </div>
                 </Link>
               </m.div>
@@ -144,8 +144,8 @@ export default function Home() {
 function FeatureCard({ title, description, href, icon, delay }: { title: string; description: string; href: string; icon: string; delay: number }) {
   return (
     <m.div whileHover={{ y: -8 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay, type: "spring", stiffness: 300 }}>
-      <Link href={href}>
-        <Card className="h-full cursor-pointer premium-card border-none glass hover:bg-white/80 dark:hover:bg-slate-900/80">
+      <Link href={href} aria-label={`Navigate to ${title}: ${description}`}>
+        <Card className="h-full cursor-pointer premium-card border-none glass hover:bg-white/80 dark:hover:bg-slate-900/80" role="link">
           <CardHeader className="pb-2">
             <div className="w-12 h-12 bg-brand-50 dark:bg-brand-900/30 rounded-2xl flex items-center justify-center text-2xl mb-4">{icon}</div>
             <CardTitle className="text-2xl font-bold font-display">{title}</CardTitle>

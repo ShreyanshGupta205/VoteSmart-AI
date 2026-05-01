@@ -1,3 +1,9 @@
+/**
+ * Global State Management
+ * 
+ * Uses Zustand with persistence to manage user progress, scores, and preferences.
+ * Includes helpers for score calculation and breakdown.
+ */
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
